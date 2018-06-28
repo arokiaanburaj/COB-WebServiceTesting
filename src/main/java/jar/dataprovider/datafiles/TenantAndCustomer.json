@@ -1,0 +1,33 @@
+{
+  "tenant": [
+    {
+      "id": 1,
+      "firstName": "Kasia",
+      "lastName": "Słomka",
+      "age": 45
+    },
+    {
+      "id": 2,
+      "firstName": "Piotr",
+      "lastName": "Kowalski",
+      "age": 19
+    }
+  ],
+  "customer": [
+    {
+      "id": 1,
+      "name": "Azor",
+      "userId": 1
+    },
+    {
+      "id": 2,
+      "name": "Tosia",
+      "userId": 1
+    },
+    {
+      "id": 2,
+      "name": "Burek",
+      "userId": 2
+    }
+  ]
+}
