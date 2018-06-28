@@ -23,6 +23,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -43,12 +44,38 @@ public class UploadCustomerTest {
 	        File file = folder.newFile("something");
 	        IOUtils.write("Something21", new FileOutputStream(file));
 
-	        RestAssuredMockMvc.given().
+	         given().
 	                multiPart(file).
 	        when().
 	                post("/fileUpload").
 	        then().
 	                body("size", greaterThan(10)).
 	                body("name", equalTo("file"));
+	    }
+	 
+	 @Test public void
+	    file_uploading_works_using_standard_rest_assured() throws IOException {
+	        File something = folder.newFile("something");
+	        IOUtils.write("Something21", new FileOutputStream(something));
+
+	        given().
+	                multiPart(something).
+	        when().
+	                post("/fileUpload").
+	        then().
+	                body("size", greaterThan(10)).
+	                body("name", equalTo("file"));
+	    }
+
+	    @Test public void
+	    file_uploading_works_using_standard_rest_assured2() {
+	        given().
+	                multiPart("controlName", "fileName", new ByteArrayInputStream("Something21".getBytes())).
+	        when().
+	                post("/fileUpload2").
+	        then().
+	                body("size", greaterThan(10)).
+	                body("name", equalTo("controlName")).
+	                body("originalName", equalTo("fileName"));
 	    }
 }
